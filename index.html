@@ -229,10 +229,12 @@
     <div class="contact-info">
       <div class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-item-label">Address</div><div class="contact-item-value">702, 7th Floor, Levata Tower,<br/>62/64 Nagdevi Street,<br/>Mumbai – 400003</div><a href="https://maps.app.goo.gl/a6ZxDRLTL43S3Mei6" target="_blank" style="font-size:0.75rem;color:var(--amber);text-decoration:none;margin-top:0.3rem;display:inline-block;">📍 View on Google Maps →</a></div></div>
       <div class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-item-label">Phone</div><div class="contact-item-value"><a href="tel:+918369680374" style="color:inherit;text-decoration:none;">+91 8369680374</a></div></div></div>
-      <div class="contact-item"><div class="contact-icon">✉️</div><div><div class="contact-item-label">Email</div><div class="contact-item-value"><a href="mailto:aagam.jhaveri@aagament.com" style="color:inherit;text-decoration:none;">aagam.jhaveri@aagament.com</a></div></div></div>
+      <div class="contact-item"><div class="contact-icon">✉️</div><div><div class="contact-item-label">Email</div><div class="contact-item-value"><a href="/cdn-cgi/l/email-protection#1d7c7c7a7c703377757c6b786f745d7c7c7a7c70787369337e7270" style="color:inherit;text-decoration:none;"><span class="__cf_email__" data-cfemail="c1a0a0a6a0acefaba9a0b7a4b3a881a0a0a6a0aca4afb5efa2aeac">[email&#160;protected]</span></a></div></div></div>
       <div class="contact-item"><div class="contact-icon">🕒</div><div><div class="contact-item-label">Business Hours</div><div class="contact-item-value">Mon – Sat: 10:00 AM – 8:00 PM</div></div></div>
     </div>
-    <form class="contact-form" onsubmit="handleSubmit(event)">
+    <form class="contact-form" action="https://formspree.io/f/xeerdenn" method="POST" onsubmit="handleSubmit(event)">
+      <input type="hidden" name="_subject" value="New Enquiry – Aagam Enterprise"/>
+      <input type="hidden" name="_replyto" value="aagam.jhaveri@aagament.com"/>
       <div class="form-row">
         <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="Full name" required/></div>
         <div class="form-group"><label class="form-label">Company / Business</label><input type="text" class="form-input" placeholder="Company name"/></div>
@@ -265,12 +267,44 @@
     </div>
     <div><div class="footer-col-title">Quick Links</div><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="catalogue.html">Catalogue</a></li><li><a href="about.html">About Us</a></li><li><a href="index.html#contact">Get a Quote</a></li></ul></div>
     <div><div class="footer-col-title">Products</div><ul class="footer-links"><li><a href="catalogue.html#bolts">Bolts</a></li><li><a href="catalogue.html#nuts">Nuts</a></li><li><a href="catalogue.html#washers">Washers &amp; Clips</a></li></ul></div>
-    <div><div class="footer-col-title">Contact</div><ul class="footer-links"><li><a href="tel:+918369680374">+91 8369680374</a></li><li><a href="mailto:aagam.jhaveri@aagament.com" style="text-decoration:none;">aagam.jhaveri@aagament.com</a></li><li><a href="https://maps.app.goo.gl/a6ZxDRLTL43S3Mei6" target="_blank">Mumbai – 400003</a></li></ul></div>
+    <div><div class="footer-col-title">Contact</div><ul class="footer-links"><li><a href="tel:+918369680374">+91 8369680374</a></li><li><a href="/cdn-cgi/l/email-protection#33525254525e1d595b524556415a73525254525e565d471d505c5e" style="text-decoration:none;"><span class="__cf_email__" data-cfemail="16777771777b387c7e776073647f56777771777b7378623875797b">[email&#160;protected]</span></a></li><li><a href="https://maps.app.goo.gl/a6ZxDRLTL43S3Mei6" target="_blank">Mumbai – 400003</a></li></ul></div>
   </div>
   <div class="footer-bottom"><p class="footer-copy">© 2025 Aagam Enterprise. All rights reserved.</p><p class="footer-copy">Designed with pride in India 🇮🇳</p></div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    const data = new FormData(form);
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    btn.style.background = '#888';
+    try {
+      const res = await fetch('https://formspree.io/f/xeerdenn', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        btn.textContent = '✓ Enquiry Sent! We will be in touch.';
+        btn.style.background = '#2A6A2A';
+        form.reset();
+        setTimeout(() => { btn.textContent = 'Send Enquiry →'; btn.style.background = ''; btn.disabled = false; }, 5000);
+      } else {
+        btn.textContent = 'Something went wrong. Please try again.';
+        btn.style.background = '#AA2A2A';
+        btn.disabled = false;
+        setTimeout(() => { btn.textContent = 'Send Enquiry →'; btn.style.background = ''; }, 4000);
+      }
+    } catch(err) {
+      btn.textContent = 'Network error. Please try again.';
+      btn.style.background = '#AA2A2A';
+      btn.disabled = false;
+      setTimeout(() => { btn.textContent = 'Send Enquiry →'; btn.style.background = ''; }, 4000);
+    }
+  }
+</script><script>
   
   function toggleMenu() {
     document.getElementById('navLinks').classList.toggle('open');
@@ -278,11 +312,4 @@
 
   const observer = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting){ x.target.classList.add('visible'); observer.unobserve(x.target); } }), {threshold:0.08});
   document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
-  document.querySelectorAll('.products-grid,.why-grid').forEach(g => [...g.children].forEach((c,i) => c.style.transitionDelay=(i*0.1)+'s'));
-  function handleSubmit(e) {
-    e.preventDefault(); const btn=e.target.querySelector('button[type="submit"]');
-    btn.textContent='✓ Sent! We will contact you soon.'; btn.style.background='#2A6A2A';
-    setTimeout(()=>{btn.textContent='Send Enquiry →';btn.style.background='';e.target.reset();},4000);
-  }
-</script>
-</body></html>
+  document.querySelectorAll('.products-grid,.why-grid').forEach(g => [.
