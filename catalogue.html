@@ -266,5 +266,36 @@
       tab.classList.add('active');
     });
   });
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    btn.style.background = '#888';
+    try {
+      const res = await fetch('https://formspree.io/f/xeerdenn', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        btn.textContent = 'Enquiry Sent! We will be in touch.';
+        btn.style.background = '#2A6A2A';
+        form.reset();
+        setTimeout(function() { btn.textContent = 'Send Enquiry'; btn.style.background = ''; btn.disabled = false; }, 5000);
+      } else {
+        btn.textContent = 'Something went wrong. Try again.';
+        btn.style.background = '#AA2A2A';
+        btn.disabled = false;
+        setTimeout(function() { btn.textContent = 'Send Enquiry'; btn.style.background = ''; }, 4000);
+      }
+    } catch(err) {
+      btn.textContent = 'Network error. Try again.';
+      btn.style.background = '#AA2A2A';
+      btn.disabled = false;
+      setTimeout(function() { btn.textContent = 'Send Enquiry'; btn.style.background = ''; }, 4000);
+    }
+  }
 </script>
 </body></html>
